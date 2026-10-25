@@ -1,0 +1,26 @@
+[plugin]
+name = "Coinbase (API)"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads the account ledger of all Coinbase wallets — the only source that knows the currency actually paid (EUR), not the display currency."
+status = "tested"
+
+[source]
+provider = "coinbase"
+provider_name = "Coinbase"
+kind = "exchange"
+channel = "api"
+provides_balance = true
+provides_id = true
+# The ledger lacks old staking income (2024: file 210, API 15), the file lacks
+# the paid currency: only file rows the API also knows are superseded.
+overlap = "event"
+not_read = ["Staking/unstaking transfers (the ledger shows one leg only; the file has both)"]
+
+[credentials]
+# Coinbase hands out a JSON key file ({"name"/"id", "privateKey"}); the same values can
+# also be entered as key name + private key. One of both ways is enough.
+fields = ["key_file", "api_key", "api_secret"]
+secret = ["key_file", "api_secret"]
+multiline = ["key_file", "api_secret"]
+alternatives = [["key_file"], ["api_key", "api_secret"]]

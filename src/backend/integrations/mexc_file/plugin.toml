@@ -1,0 +1,21 @@
+[plugin]
+name = "MEXC (file)"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads MEXC exports (Excel, English or German): spot trades, fiat OTC purchases, deposits, withdrawals, transfers, futures capital flow and closed positions. Select all files of one or several exports together."
+status = "tested"
+
+[source]
+provider = "mexc"
+provider_name = "MEXC"
+kind = "exchange"
+channel = "file"
+provides_id = true
+futures = true
+expected_files = ["All .xlsx files of a MEXC export (one or several exports at once)"]
+not_read = [
+  "Order histories (contain unfilled orders)",
+  "Spot and futures statements (split each trade into bookings)",
+  "Futures bonus and its deduction (trial funds of the exchange, net zero)",
+  "Asset snapshots (balance check, later)",
+]

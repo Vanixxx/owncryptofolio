@@ -1,0 +1,21 @@
+[plugin]
+name = "Cardano"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads ADA transfers and reward withdrawals of an address through Koios (free, no key), netted per transaction."
+status = "tested"
+
+[source]
+provider = "cardano"
+provider_name = "Cardano"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["Native tokens", "Staking rewards not yet withdrawn (they appear when withdrawn)", "Other addresses of the same wallet"]
+
+[chain]
+native_asset = "ADA"
+decimals = 6
+address_pattern = "^addr1[02-9ac-hj-np-z]{50,110}$"
+explorer = "https://api.koios.rest/api/v1"

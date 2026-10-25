@@ -1,0 +1,48 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+
+# Real financial data, backups, exports
+daten/
+
+# Old code base (reference only, contains secrets and build artifacts)
+src_old/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Node / frontend
+node_modules/
+dist/
+# generated from npm icon packages before dev/build (scripts/coin-icons.mjs)
+src/frontend/public/coins/
+src/frontend/public/logos/
+*.tsbuildinfo
+
+# Obsidian volatile workspace
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Agent working files
+.superpowers/
+
+# Local runtime data of the dev backend (keys, uploads)
+src/backend/.data/

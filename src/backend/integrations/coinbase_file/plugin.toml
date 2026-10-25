@@ -1,0 +1,15 @@
+[plugin]
+name = "Coinbase (file)"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads Coinbase's yearly transaction CSV (English). Amounts are converted to the account's display currency by Coinbase, so trades are better taken from the API; the file fills in what the API no longer has (old staking income)."
+status = "tested"
+
+[source]
+provider = "coinbase"
+provider_name = "Coinbase"
+kind = "exchange"
+channel = "file"
+provides_id = true
+expected_files = ["Yearly transaction CSV (English), one per year — several at once are fine"]
+not_read = ["German export (rounds to nine decimals)", "HTML reports"]

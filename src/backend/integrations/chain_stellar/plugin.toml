@@ -1,0 +1,21 @@
+[plugin]
+name = "Stellar"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads XLM and asset payments of an account through Horizon (free, no key)."
+status = "beta"
+
+[source]
+provider = "stellar"
+provider_name = "Stellar"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["DEX trades (offers)", "Account merges", "Claimable balances"]
+
+[chain]
+native_asset = "XLM"
+decimals = 7
+address_pattern = "^G[A-Z2-7]{55}$"
+explorer = "https://horizon.stellar.org"

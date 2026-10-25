@@ -1,0 +1,21 @@
+[plugin]
+name = "Dogecoin"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads DOGE transfers of an address through BlockCypher (free, no key), netted per transaction."
+status = "beta"
+
+[source]
+provider = "dogecoin"
+provider_name = "Dogecoin"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["Doginals / DRC-20 inscriptions"]
+
+[chain]
+native_asset = "DOGE"
+decimals = 8
+address_pattern = "^[DA9][1-9A-HJ-NP-Za-km-z]{25,34}$"
+explorer = "https://api.blockcypher.com/v1/doge/main"

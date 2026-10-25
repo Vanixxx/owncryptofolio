@@ -1,0 +1,20 @@
+# The build context is the repository root (src/Dockerfile). Only what the image needs gets
+# through; everything else (data, notes, old code) never reaches the builder.
+*
+!src/backend
+!src/frontend
+!LICENSE
+!THIRD-PARTY-NOTICES.md
+
+**/.env
+**/.env.*
+**/.venv
+**/.data
+**/node_modules
+**/dist
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+**/*.tsbuildinfo
+src/frontend/public/coins
+src/frontend/public/logos

@@ -1,0 +1,23 @@
+[plugin]
+name = "TON"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads TON and jetton transfers (e.g. USDT) of a wallet through toncenter (free; a key only raises the limits)."
+status = "beta"
+
+[source]
+provider = "ton"
+provider_name = "TON"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["NFTs", "Staking pools and DeFi positions"]
+
+[chain]
+native_asset = "TON"
+decimals = 9
+address_pattern = "^([UEk0][Qf][A-Za-z0-9_-]{46}|-?[0-9]+:[0-9a-fA-F]{64})$"
+explorer = "https://toncenter.com/api/v3"
+service = "toncenter"
+service_optional = true

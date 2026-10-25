@@ -1,0 +1,20 @@
+# Monthly update proposals as pull requests; security fixes come at once (repository
+# setting "Dependabot security updates").
+version: 2
+updates:
+  - package-ecosystem: uv
+    directory: /src/backend
+    schedule: { interval: monthly }
+    groups:
+      python: { patterns: ["*"] }
+  - package-ecosystem: npm
+    directory: /src/frontend
+    schedule: { interval: monthly }
+    groups:
+      npm: { patterns: ["*"] }
+  - package-ecosystem: docker
+    directory: /src
+    schedule: { interval: monthly }
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: monthly }

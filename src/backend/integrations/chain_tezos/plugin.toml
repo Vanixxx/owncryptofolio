@@ -1,0 +1,21 @@
+[plugin]
+name = "Tezos"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads XTZ, FA1.2/FA2 token transfers and baker payouts of an account through TzKT (free, no key)."
+status = "beta"
+
+[source]
+provider = "tezos"
+provider_name = "Tezos"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["NFTs", "Own staking (stake/unstake): only its fee", "Smart rollups, tickets"]
+
+[chain]
+native_asset = "XTZ"
+decimals = 6
+address_pattern = "^(tz1|tz2|tz3|tz4)[1-9A-HJ-NP-Za-km-z]{33}$"
+explorer = "https://api.tzkt.io/v1"

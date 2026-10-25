@@ -1,0 +1,21 @@
+[plugin]
+name = "Litecoin"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads LTC transfers of an address through litecoinspace.org (free, no key), netted per transaction."
+status = "tested"
+
+[source]
+provider = "litecoin"
+provider_name = "Litecoin"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["Extended public keys (Ltub/xpub): one address per network", "MWEB transfers"]
+
+[chain]
+native_asset = "LTC"
+decimals = 8
+address_pattern = "^(ltc1[02-9ac-hj-np-z]{11,87}|[LM3][1-9A-HJ-NP-Za-km-z]{26,33})$"
+explorer = "https://litecoinspace.org/api"

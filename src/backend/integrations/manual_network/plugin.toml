@@ -1,0 +1,13 @@
+[plugin]
+name = "Network without connection"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "A network of a wallet kept by hand, for chains without a plugin (Optimism, 2026-10-11)."
+status = "tested"
+
+[source]
+provider = "manual_network"
+provider_name = "Network without connection"
+kind = "wallet"
+channel = "manual"
+not_read = ["Nothing is fetched: every entry comes from you"]

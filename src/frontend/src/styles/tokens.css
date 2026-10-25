@@ -1,0 +1,247 @@
+/* Design tokens (ADR 0031). Components use ONLY these variables.
+   A style is one set of values per mode: [data-style] x [data-mode] on <html>.
+   Adding a style = adding two blocks here (and its name in the settings registry). */
+
+:root,
+[data-style='night'] {
+  --f-ui: 'Onest', system-ui, sans-serif; --f-num: 'Onest', system-ui, sans-serif;
+  --radius: 18px; --radius-s: 12px; --chart-w: 2.4; --glow: 0;
+}
+:root,
+[data-style='night'][data-mode='dark'] {
+  --bg: #0b1418; --surface: #111e24; --surface-2: #16262d; --line: #1f333b;
+  --fg: #e6f0f2; --muted: #84a0a8; --accent: #2bc4c4; --accent-2: #2bc4c4; --accent-fg: #04201f;
+  --up: #3ddc97; --down: #ff6b6b; --warn: #f2b84b;
+  color-scheme: dark;
+}
+[data-style='night'][data-mode='light'] {
+  --bg: #f2f6f7; --surface: #ffffff; --surface-2: #eaf1f2; --line: #d8e3e5;
+  --fg: #0f2329; --muted: #557178; --accent: #0e8f91; --accent-2: #0e8f91; --accent-fg: #ffffff;
+  --up: #12895a; --down: #d13f3f; --warn: #a86b00;
+  color-scheme: light;
+}
+
+[data-style='neon'] {
+  --f-ui: 'Sora', system-ui, sans-serif; --f-num: 'Sora', system-ui, sans-serif;
+  --radius: 22px; --radius-s: 14px; --chart-w: 2.6; --glow: 1;
+}
+[data-style='neon'][data-mode='dark'] {
+  --bg: #0a0816; --surface: rgb(255 255 255 / 0.045); --surface-2: rgb(255 255 255 / 0.08);
+  --line: rgb(173 150 255 / 0.18);
+  --fg: #f1eeff; --muted: #9c95c2; --accent: #8f7bff; --accent-2: #2fe6ff; --accent-fg: #0a0816;
+  --up: #2ff5a8; --down: #ff5c8a; --warn: #ffd166;
+  color-scheme: dark;
+}
+[data-style='neon'][data-mode='light'] {
+  --bg: #f6f4ff; --surface: rgb(255 255 255 / 0.8); --surface-2: #ece8ff; --line: #dcd4ff;
+  --fg: #1a1433; --muted: #6a6390; --accent: #6a52f5; --accent-2: #0aa5c2; --accent-fg: #ffffff;
+  --up: #0c9a64; --down: #d6336c; --warn: #9a6a00;
+  color-scheme: light;
+}
+
+[data-style='terminal'] {
+  --f-ui: 'IBM Plex Sans', system-ui, sans-serif; --f-num: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 6px; --radius-s: 4px; --chart-w: 1.6; --glow: 0;
+}
+[data-style='terminal'][data-mode='dark'] {
+  --bg: #0e0e0c; --surface: #151513; --surface-2: #1c1c19; --line: #2a2a25;
+  --fg: #ecebe4; --muted: #8f8d80; --accent: #f0a92e; --accent-2: #f0a92e; --accent-fg: #1a1205;
+  --up: #39d98a; --down: #ff5a4f; --warn: #f0a92e;
+  color-scheme: dark;
+}
+[data-style='terminal'][data-mode='light'] {
+  --bg: #f5f4ef; --surface: #ffffff; --surface-2: #efede5; --line: #dedbd0;
+  --fg: #1b1a16; --muted: #6b685c; --accent: #b87500; --accent-2: #b87500; --accent-fg: #ffffff;
+  --up: #128a52; --down: #c8382e; --warn: #9a6400;
+  color-scheme: light;
+}
+
+/* Graphit (Vanixxx, 2026-10-20): neutral grey, lime accent; dark first, light alike. */
+[data-style='graphite'] {
+  --f-ui: 'Sora', system-ui, sans-serif; --f-num: 'Sora', system-ui, sans-serif;
+  --radius: 14px; --radius-s: 10px; --chart-w: 2.4; --glow: 0;
+}
+[data-style='graphite'][data-mode='dark'] {
+  --bg: #141517; --surface: #1c1d20; --surface-2: #26272b; --line: #2f3135;
+  --fg: #f2f3f0; --muted: #9a9c97; --accent: #c6f432; --accent-2: #c6f432; --accent-fg: #141517;
+  --up: #b5e830; --down: #ff6b5b; --warn: #ffc94d;
+  color-scheme: dark;
+}
+[data-style='graphite'][data-mode='light'] {
+  --bg: #f1f2ef; --surface: #ffffff; --surface-2: #e7e8e4; --line: #d6d8d2;
+  --fg: #17181a; --muted: #5d605a; --accent: #4f6b00; --accent-2: #4f6b00; --accent-fg: #ffffff;
+  --up: #3d7a12; --down: #c63c2e; --warn: #8f6300;
+  color-scheme: light;
+}
+
+/* Rosé (Vanixxx, 2026-10-20): warm, wine red, soft corners; light first, dark alike. */
+[data-style='rose'] {
+  --f-ui: 'Sora', system-ui, sans-serif; --f-num: 'Sora', system-ui, sans-serif;
+  --radius: 22px; --radius-s: 14px; --chart-w: 2.4; --glow: 0;
+}
+[data-style='rose'][data-mode='light'] {
+  --bg: #fbf4f2; --surface: #ffffff; --surface-2: #f6e8e4; --line: #ecd9d3;
+  --fg: #2b1a1f; --muted: #82666d; --accent: #a8325e; --accent-2: #a8325e; --accent-fg: #ffffff;
+  --up: #2f8a5b; --down: #c0392b; --warn: #a66a00;
+  color-scheme: light;
+}
+[data-style='rose'][data-mode='dark'] {
+  --bg: #1c1216; --surface: #26181e; --surface-2: #311f27; --line: #432934;
+  --fg: #f8eaee; --muted: #b996a1; --accent: #e7799f; --accent-2: #e7799f; --accent-fg: #2b0d18;
+  --up: #5fd39a; --down: #ff7a6b; --warn: #f2b84b;
+  color-scheme: dark;
+}
+
+/* Hoher Kontrast (Vanixxx, 2026-10-20): readable in sunlight or with weak eyes. */
+[data-style='contrast'] {
+  --f-ui: 'Onest', system-ui, sans-serif; --f-num: 'Onest', system-ui, sans-serif;
+  --radius: 8px; --radius-s: 6px; --chart-w: 3; --glow: 0;
+}
+[data-style='contrast'][data-mode='dark'] {
+  --bg: #000000; --surface: #000000; --surface-2: #1a1a1a; --line: #ffffff;
+  --fg: #ffffff; --muted: #e0e0e0; --accent: #ffd400; --accent-2: #ffd400; --accent-fg: #000000;
+  --up: #4dff91; --down: #ff6b6b; --warn: #ffd400;
+  color-scheme: dark;
+}
+[data-style='contrast'][data-mode='light'] {
+  --bg: #ffffff; --surface: #ffffff; --surface-2: #ededed; --line: #000000;
+  --fg: #000000; --muted: #1f1f1f; --accent: #0033cc; --accent-2: #0033cc; --accent-fg: #ffffff;
+  --up: #006b2e; --down: #b30000; --warn: #7a4f00;
+  color-scheme: light;
+}
+
+/* Amethyst (Vanixxx, 2026-10-20): aubergine and violet; dark first. */
+[data-style='amethyst'] {
+  --f-ui: 'Sora', system-ui, sans-serif; --f-num: 'Sora', system-ui, sans-serif;
+  --radius: 18px; --radius-s: 12px; --chart-w: 2.4; --glow: 0;
+}
+[data-style='amethyst'][data-mode='dark'] {
+  --bg: #15101f; --surface: #1e1730; --surface-2: #281f3e; --line: #34294f;
+  --fg: #f3eefe; --muted: #a99cc6; --accent: #a78bfa; --accent-2: #a78bfa; --accent-fg: #1a0f33;
+  --up: #5ee0a0; --down: #ff7a90; --warn: #f5c451;
+  color-scheme: dark;
+}
+[data-style='amethyst'][data-mode='light'] {
+  --bg: #f5f3fb; --surface: #ffffff; --surface-2: #ece8f7; --line: #ddd6ef;
+  --fg: #1e1832; --muted: #6b6488; --accent: #6d4fd1; --accent-2: #6d4fd1; --accent-fg: #ffffff;
+  --up: #1d8a5a; --down: #c8364c; --warn: #9a6a00;
+  color-scheme: light;
+}
+
+/* Sand (Vanixxx, 2026-10-20): warm brown and terracotta; dark first. */
+[data-style='sand'] {
+  --f-ui: 'IBM Plex Sans', system-ui, sans-serif; --f-num: 'IBM Plex Sans', system-ui, sans-serif;
+  --radius: 12px; --radius-s: 8px; --chart-w: 2.2; --glow: 0;
+}
+[data-style='sand'][data-mode='dark'] {
+  --bg: #1b1713; --surface: #24201a; --surface-2: #2f2921; --line: #3c342a;
+  --fg: #f4ece0; --muted: #b3a48f; --accent: #e07b4f; --accent-2: #e07b4f; --accent-fg: #1f0d04;
+  --up: #8fc96b; --down: #f06a5d; --warn: #e8b64c;
+  color-scheme: dark;
+}
+[data-style='sand'][data-mode='light'] {
+  --bg: #f6f0e6; --surface: #fffcf6; --surface-2: #efe6d6; --line: #e0d3bd;
+  --fg: #2a2118; --muted: #76685a; --accent: #b4532b; --accent-2: #b4532b; --accent-fg: #ffffff;
+  --up: #3f7d2a; --down: #c0392b; --warn: #8f6300;
+  color-scheme: light;
+}
+
+/* iOS (Vanixxx, 2026-10-21): Apple's "Liquid Glass" (iOS 26) — milky glass cards over a soft
+   colour field, bright edges, round corners, the system font and system blue. --bg is a solid
+   stand-in (style tile, modals); the page itself shows the colour field. */
+[data-style='ios'] {
+  --f-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', 'Onest', system-ui, sans-serif;
+  --f-num: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Onest', system-ui, sans-serif;
+  --radius: 26px; --radius-s: 14px; --chart-w: 2.2; --glow: 0;
+}
+[data-style='ios'][data-mode='light'] {
+  --bg: #e4ebf7; --surface: rgb(255 255 255 / 0.45); --surface-2: rgb(255 255 255 / 0.55); --line: rgb(255 255 255 / 0.7);
+  --fg: #000000; --muted: #4f4f57; --accent: #007aff; --accent-2: #007aff; --accent-fg: #ffffff;
+  --up: #248a3d; --down: #d70015; --warn: #c93400;
+  --field: radial-gradient(60% 50% at 15% 10%, #7cc4ff 0%, transparent 60%),
+    radial-gradient(55% 45% at 90% 20%, #ff9ad5 0%, transparent 60%),
+    radial-gradient(60% 60% at 70% 95%, #9b8cff 0%, transparent 60%),
+    radial-gradient(50% 50% at 5% 85%, #6ff2c9 0%, transparent 60%), #dfe7f5;
+  --edge: inset 0 1px 0 rgb(255 255 255 / 0.55), 0 12px 32px -14px rgb(20 20 60 / 0.35);
+  color-scheme: light;
+}
+[data-style='ios'][data-mode='dark'] {
+  --bg: #0b0c12; --surface: rgb(40 40 48 / 0.42); --surface-2: rgb(255 255 255 / 0.12); --line: rgb(255 255 255 / 0.18);
+  --fg: #ffffff; --muted: #a1a1aa; --accent: #0a84ff; --accent-2: #0a84ff; --accent-fg: #ffffff;
+  --up: #30d158; --down: #ff453a; --warn: #ff9f0a;
+  --field: radial-gradient(60% 50% at 15% 10%, #1f4fa8 0%, transparent 60%),
+    radial-gradient(55% 45% at 90% 20%, #7a2a6b 0%, transparent 60%),
+    radial-gradient(60% 60% at 70% 95%, #3b2f8f 0%, transparent 60%),
+    radial-gradient(50% 50% at 5% 85%, #0f6b5a 0%, transparent 60%), #05060a;
+  --edge: inset 0 1px 0 rgb(255 255 255 / 0.14), 0 12px 32px -14px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+[data-style='ios'] body { background: var(--field); background-attachment: fixed; }
+[data-style='ios'] .card {
+  border-color: var(--line);
+  backdrop-filter: blur(28px) saturate(180%); -webkit-backdrop-filter: blur(28px) saturate(180%);
+  box-shadow: var(--edge);
+}
+[data-style='ios'] nav { background: color-mix(in srgb, var(--bg) 35%, transparent); backdrop-filter: blur(30px) saturate(180%); }
+[data-style='ios'] .accent-fill { border-radius: 999px; }
+
+/* The few named per-style exceptions (ADR 0031). Nothing style-specific elsewhere. */
+[data-style='neon'] body {
+  background:
+    radial-gradient(120% 60% at 85% -10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+    radial-gradient(90% 50% at -10% 30%, color-mix(in srgb, var(--accent-2) 10%, transparent), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+}
+[data-style='neon'] .card { backdrop-filter: blur(14px); }
+[data-style='rose'][data-mode='light'] .card { box-shadow: 0 10px 30px -22px rgb(168 50 94 / 0.45); }
+[data-style='contrast'] .card { border-width: 2px; }
+[data-style='contrast'] body { font-weight: 500; }
+[data-style='neon'] .accent-fill { background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+[data-style='neon'] .hero-value {
+  background: linear-gradient(90deg, var(--fg), color-mix(in srgb, var(--accent-2) 70%, var(--fg)));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* An element that carries its own data-style (e.g. the style preview) renders in it. */
+[data-style] { font-family: var(--f-ui); color: var(--fg); }
+
+/* Dark logos (FET and some tokens) vanish on a dark card: a light disc behind them in every
+   dark mode (CoinIcon measures the logo). */
+:root, [data-mode='dark'] { --coin-disc: #e9eef0; }
+[data-mode='light'] { --coin-disc: transparent; }
+
+/* A colour of one's own for every style (Vanixxx, 2026-10-21): only the accent changes, the
+   style keeps everything else. "default" (no rule) is the style's own colour. Last in the
+   file, so it wins over the style blocks. A style tile carries its own data-accent. */
+[data-mode='dark'][data-accent='petrol'] { --accent: #2bc4c4; --accent-2: #2bc4c4; --accent-fg: #04201f; }
+[data-mode='dark'][data-accent='blue'] { --accent: #4c8dff; --accent-2: #4c8dff; --accent-fg: #04122e; }
+[data-mode='dark'][data-accent='purple'] { --accent: #a78bfa; --accent-2: #a78bfa; --accent-fg: #1a0f33; }
+[data-mode='dark'][data-accent='amber'] { --accent: #f2b84b; --accent-2: #f2b84b; --accent-fg: #241703; }
+[data-mode='dark'][data-accent='green'] { --accent: #3ddc97; --accent-2: #3ddc97; --accent-fg: #03241a; }
+[data-mode='dark'][data-accent='rose'] { --accent: #ff7aa2; --accent-2: #ff7aa2; --accent-fg: #2b0d18; }
+[data-mode='dark'][data-accent='red'] { --accent: #ff6b5b; --accent-2: #ff6b5b; --accent-fg: #2b0804; }
+[data-mode='light'][data-accent='petrol'] { --accent: #0e8f91; --accent-2: #0e8f91; --accent-fg: #ffffff; }
+[data-mode='light'][data-accent='blue'] { --accent: #2563eb; --accent-2: #2563eb; --accent-fg: #ffffff; }
+[data-mode='light'][data-accent='purple'] { --accent: #7050d8; --accent-2: #7050d8; --accent-fg: #ffffff; }
+[data-mode='light'][data-accent='amber'] { --accent: #b26a00; --accent-2: #b26a00; --accent-fg: #ffffff; }
+[data-mode='light'][data-accent='green'] { --accent: #11804f; --accent-2: #11804f; --accent-fg: #ffffff; }
+[data-mode='light'][data-accent='rose'] { --accent: #c2416e; --accent-2: #c2416e; --accent-fg: #ffffff; }
+[data-mode='light'][data-accent='red'] { --accent: #c8362a; --accent-2: #c8362a; --accent-fg: #ffffff; }
+
+/* Neon in every colour keeps its gradient (Vanixxx, 2026-10-21): two hues per colour. After the
+   generic colours, so these win for Neon. */
+[data-style='neon'][data-mode='dark'][data-accent='petrol'] { --accent: #2bc4c4; --accent-2: #3ddc97; --accent-fg: #04201f; }
+[data-style='neon'][data-mode='dark'][data-accent='blue'] { --accent: #4c6dff; --accent-2: #2fe6ff; --accent-fg: #04122e; }
+[data-style='neon'][data-mode='dark'][data-accent='purple'] { --accent: #a78bfa; --accent-2: #ff5cc8; --accent-fg: #1a0f33; }
+[data-style='neon'][data-mode='dark'][data-accent='amber'] { --accent: #ffb347; --accent-2: #ff5c7a; --accent-fg: #241703; }
+[data-style='neon'][data-mode='dark'][data-accent='green'] { --accent: #2ff5a8; --accent-2: #2fe6ff; --accent-fg: #03241a; }
+[data-style='neon'][data-mode='dark'][data-accent='rose'] { --accent: #ff7aa2; --accent-2: #a78bfa; --accent-fg: #2b0d18; }
+[data-style='neon'][data-mode='dark'][data-accent='red'] { --accent: #ff4d6d; --accent-2: #ffb347; --accent-fg: #2b0804; }
+[data-style='neon'][data-mode='light'][data-accent='petrol'] { --accent: #0e8f91; --accent-2: #12895a; --accent-fg: #ffffff; }
+[data-style='neon'][data-mode='light'][data-accent='blue'] { --accent: #2f4fe0; --accent-2: #0a9cc2; --accent-fg: #ffffff; }
+[data-style='neon'][data-mode='light'][data-accent='purple'] { --accent: #6a52f5; --accent-2: #c0368f; --accent-fg: #ffffff; }
+[data-style='neon'][data-mode='light'][data-accent='amber'] { --accent: #b86e00; --accent-2: #c4364f; --accent-fg: #ffffff; }
+[data-style='neon'][data-mode='light'][data-accent='green'] { --accent: #0c9a64; --accent-2: #0a8fb0; --accent-fg: #ffffff; }
+[data-style='neon'][data-mode='light'][data-accent='rose'] { --accent: #c2416e; --accent-2: #6a52f5; --accent-fg: #ffffff; }
+[data-style='neon'][data-mode='light'][data-accent='red'] { --accent: #c8263f; --accent-2: #b86e00; --accent-fg: #ffffff; }

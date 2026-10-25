@@ -1,0 +1,21 @@
+[plugin]
+name = "Kaspa"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads KAS transfers of an address through api.kaspa.org (free, no key), netted per transaction."
+status = "tested"
+
+[source]
+provider = "kaspa"
+provider_name = "Kaspa"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["KRC-20 tokens"]
+
+[chain]
+native_asset = "KAS"
+decimals = 8
+address_pattern = "^kaspa:[a-z0-9]{61,63}$"
+explorer = "https://api.kaspa.org"

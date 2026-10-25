@@ -1,0 +1,13 @@
+[plugin]
+name = "Exchange without connection"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "An exchange kept by hand: entries through the form or the template (ADR 0036)."
+status = "tested"
+
+[source]
+provider = "manual"
+provider_name = "Exchange without connection"
+kind = "exchange"
+channel = "manual"
+not_read = ["Nothing is fetched: every entry comes from you"]

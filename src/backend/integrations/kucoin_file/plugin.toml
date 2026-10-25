@@ -1,0 +1,18 @@
+[plugin]
+name = "KuCoin (file)"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads KuCoin's BillingHistory ZIP (25 CSV files): deposits, withdrawals, fiat deposits, spot trades, conversions, events only found in the account history, and the realised futures result."
+status = "tested"
+
+[source]
+provider = "kucoin"
+provider_name = "KuCoin"
+kind = "exchange"
+channel = "file"
+futures = true
+expected_files = ["BillingHistory…zip"]
+not_read = [
+  "Account history except events (it repeats every transfer between funding, trading and futures accounts)",
+  "Margin, Earn and trading-bot files",
+]

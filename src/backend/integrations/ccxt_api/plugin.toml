@@ -1,0 +1,29 @@
+# One plugin for every exchange ccxt can read (ADR 0048). It turns into one source per
+# exchange; an exchange with its own plugin (Bitget, MEXC, Coinbase) keeps that one.
+[plugin]
+name = "ccxt (API)"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Spot trades, deposits, withdrawals and the balance through the exchange's API, read the same way for every exchange."
+status = "beta"
+
+[source]
+provider = "ccxt"
+provider_name = "ccxt"
+kind = "exchange"
+channel = "api"
+provides_balance = true
+provides_id = true
+not_read = ["Futures and margin", "Earn, staking and savings", "Transfers between your accounts at the exchange", "Fiat deposits and direct card or bank purchases"]
+
+[credentials]
+fields = ["api_key", "api_secret"]
+secret = ["api_secret"]
+
+[ccxt]
+# checked with a real account: the beta badge goes away
+tested = []
+# futures only, or several accounts of one exchange that a spot reader cannot tell apart
+exclude = ["binancecoinm", "binanceusdm", "kucoinfutures", "coinbaseinternational", "deribit"]
+# withdrawal amount already holds the fee (else: sent = amount + fee)
+fee_in_amount = []

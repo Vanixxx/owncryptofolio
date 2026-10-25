@@ -1,0 +1,21 @@
+[plugin]
+name = "MEXC (API)"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Ongoing sync of spot trades, deposits and withdrawals. MEXC answers only the last 89 days; history comes from the export files."
+status = "tested"
+
+[source]
+provider = "mexc"
+provider_name = "MEXC"
+kind = "exchange"
+channel = "api"
+provides_balance = true
+provides_id = true
+history_days = 89
+window_max_days = 89
+not_read = ["Futures (from the export files)"]
+
+[credentials]
+fields = ["api_key", "api_secret"]
+secret = ["api_secret"]

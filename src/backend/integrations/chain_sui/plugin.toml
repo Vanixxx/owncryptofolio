@@ -1,0 +1,21 @@
+[plugin]
+name = "Sui"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads SUI and coin balance changes of an address through the public Sui GraphQL endpoint (free, no key)."
+status = "tested"
+
+[source]
+provider = "sui"
+provider_name = "Sui"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["Staked SUI (rewards appear when unstaked)", "NFTs and other objects"]
+
+[chain]
+native_asset = "SUI"
+decimals = 9
+address_pattern = "^0x[0-9a-fA-F]{64}$"
+explorer = "https://graphql.mainnet.sui.io/graphql"

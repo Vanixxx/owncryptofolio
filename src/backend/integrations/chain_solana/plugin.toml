@@ -1,0 +1,21 @@
+[plugin]
+name = "Solana"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads SOL and SPL token movements (e.g. RENDER) of an address through the public Solana RPC (free, no key)."
+status = "tested"
+
+[source]
+provider = "solana"
+provider_name = "Solana"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["Token accounts closed before the fetch", "Staking rewards (stake accounts)", "NFTs"]
+
+[chain]
+native_asset = "SOL"
+decimals = 9
+address_pattern = "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+explorer = "https://api.mainnet-beta.solana.com"

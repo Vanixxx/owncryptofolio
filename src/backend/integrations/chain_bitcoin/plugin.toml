@@ -1,0 +1,21 @@
+[plugin]
+name = "Bitcoin"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads BTC transfers of an address through mempool.space (free, no key), netted per transaction."
+status = "beta"
+
+[source]
+provider = "bitcoin"
+provider_name = "Bitcoin"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["Extended public keys (xpub): one address per network"]
+
+[chain]
+native_asset = "BTC"
+decimals = 8
+address_pattern = "^(bc1[02-9ac-hj-np-z]{11,87}|[13][1-9A-HJ-NP-Za-km-z]{25,34})$"
+explorer = "https://mempool.space/api"

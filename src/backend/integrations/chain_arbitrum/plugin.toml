@@ -1,0 +1,23 @@
+[plugin]
+name = "Arbitrum One"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads ETH, tokens and internal ETH transfers of an address through Etherscan V2 (free key)."
+status = "beta"
+
+[source]
+provider = "arbitrum"
+provider_name = "Arbitrum One"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["NFT transfers (ERC-721/1155)"]
+
+[chain]
+native_asset = "ETH"
+decimals = 18
+address_pattern = "^0x[0-9a-fA-F]{40}$"
+explorer = "https://api.etherscan.io/v2/api"
+family = "evm"
+service = "etherscan"

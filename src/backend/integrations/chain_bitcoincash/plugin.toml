@@ -1,0 +1,21 @@
+[plugin]
+name = "Bitcoin Cash"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads BCH transfers of an address through Haskoin (bitcoin.com, free, no key), netted per transaction."
+status = "beta"
+
+[source]
+provider = "bitcoincash"
+provider_name = "Bitcoin Cash"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["CashTokens"]
+
+[chain]
+native_asset = "BCH"
+decimals = 8
+address_pattern = "^(bitcoincash:)?[qp][02-9ac-hj-np-z]{41}$"
+explorer = "https://api.haskoin.com/bch"

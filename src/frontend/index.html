@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/app-icons/E5-192.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1418" />
+    <!-- the home screen icon chosen in the settings (served by the backend) -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="owncryptofolio" />
+    <title>owncryptofolio</title>
+    <script>
+      // Apply the last known style/theme before first paint to avoid a flash.
+      (function () {
+        var a = {};
+        try { a = JSON.parse(localStorage.getItem('ocf.appearance') || '{}'); } catch (e) {}
+        var style = a.style || 'night', theme = a.theme || 'system';
+        var dark = theme === 'dark' || (theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        var root = document.documentElement;
+        root.dataset.style = style;
+        root.dataset.mode = dark ? 'dark' : 'light';
+        root.dataset.accent = a.accent || 'default';
+        if (a.language) root.lang = a.language;
+        try { var icon = localStorage.getItem('ocf.icon'); if (icon) document.querySelector('link[rel="icon"]').href = '/app-icons/' + icon + '-192.png'; } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

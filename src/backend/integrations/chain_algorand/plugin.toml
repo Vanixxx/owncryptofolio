@@ -1,0 +1,21 @@
+[plugin]
+name = "Algorand"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads ALGO, ASA token transfers and participation rewards of an account through the AlgoNode indexer (free, no key)."
+status = "beta"
+
+[source]
+provider = "algorand"
+provider_name = "Algorand"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["NFTs (ASA with 0 decimals and total 1)", "App state (DeFi positions)"]
+
+[chain]
+native_asset = "ALGO"
+decimals = 6
+address_pattern = "^[A-Z2-7]{58}$"
+explorer = "https://mainnet-idx.algonode.cloud/v2"

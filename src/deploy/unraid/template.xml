@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!-- Unraid template for the published image (Community Applications, or copied by hand to
+     /boot/config/plugins/dockerMan/templates-user/my-owncryptofolio.xml). -->
+<Container version="2">
+  <Name>owncryptofolio</Name>
+  <Repository>ghcr.io/vanixxx/owncryptofolio:latest</Repository>
+  <Registry>https://github.com/Vanixxx/owncryptofolio/pkgs/container/owncryptofolio</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Vanixxx/owncryptofolio/issues</Support>
+  <Project>https://github.com/Vanixxx/owncryptofolio</Project>
+  <Overview>Self-hosted crypto portfolio tracker with German tax reports. Reads exchanges (API or export file), 35 blockchain networks and your own files, merges them into one history, values everything with stored prices and shows holdings, profit and loss, the yearly German tax report (Excel/PDF) and a source-of-funds statement. Needs a PostgreSQL container. English and German interface.[br][br]Selbst gehosteter Krypto-Portfolio-Tracker mit deutschem Steuerbericht. Braucht einen PostgreSQL-Container.</Overview>
+  <Category>Tools: Productivity:</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Vanixxx/owncryptofolio/main/src/deploy/unraid/template.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Vanixxx/owncryptofolio/main/src/frontend/public/app-icons/E5-512.png</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires>A PostgreSQL container (version 18 or older), e.g. "postgresql18" from Community Applications.</Requires>
+  <Config Name="Web UI port" Target="8080" Default="8085" Mode="tcp" Description="Port of the web interface in your network" Type="Port" Display="always" Required="true" Mask="false">8085</Config>
+  <Config Name="Data (keys, originals, logs)" Target="/data" Default="/mnt/user/appdata/owncryptofolio" Mode="rw" Description="Holds the keys - include it in your backups!" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/owncryptofolio</Config>
+  <Config Name="Backups" Target="/backups" Default="/mnt/user/appdata/owncryptofolio-backups" Mode="rw" Description="Encrypted backups; better a share that is backed up off the server" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/owncryptofolio-backups</Config>
+  <Config Name="Database: host" Target="DB_HOST" Default="" Mode="" Description="IP or name of the PostgreSQL server (Unraid IP for a PostgreSQL container on bridge)" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Database: port" Target="DB_PORT" Default="5432" Mode="" Description="" Type="Variable" Display="always" Required="true" Mask="false">5432</Config>
+  <Config Name="Database: name" Target="DB_NAME" Default="owncryptofolio" Mode="" Description="Created on the first start if missing" Type="Variable" Display="always" Required="true" Mask="false">owncryptofolio</Config>
+  <Config Name="Database: user" Target="DB_USER" Default="postgres" Mode="" Description="Needs the right to create a database (CREATEDB)" Type="Variable" Display="always" Required="true" Mask="false">postgres</Config>
+  <Config Name="Database: password" Target="DB_PASSWORD" Default="" Mode="" Description="" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Time zone" Target="TZ" Default="Europe/Berlin" Mode="" Description="Time stamps in the log; the interface has its own setting" Type="Variable" Display="advanced" Required="false" Mask="false">Europe/Berlin</Config>
+</Container>

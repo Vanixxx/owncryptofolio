@@ -1,0 +1,14 @@
+[plugin]
+name = "Kraken (file)"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads Kraken's ledger export (ledgers.csv or .xlsx): deposits, withdrawals, trades, instant buys; spot-futures transfers must net to zero."
+status = "tested"
+
+[source]
+provider = "kraken"
+provider_name = "Kraken"
+kind = "exchange"
+channel = "file"
+provides_id = true
+expected_files = ["Ledger export (ledgers.csv, or the same as .xlsx)"]

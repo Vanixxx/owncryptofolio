@@ -1,0 +1,21 @@
+[plugin]
+name = "Hedera"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads HBAR transfers and staking rewards of an account through the public Hedera mirror node (free, no key)."
+status = "tested"
+
+[source]
+provider = "hedera"
+provider_name = "Hedera"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["HTS tokens", "NFTs"]
+
+[chain]
+native_asset = "HBAR"
+decimals = 8
+address_pattern = "^0\\.0\\.[0-9]+$"
+explorer = "https://mainnet-public.mirrornode.hedera.com/api/v1"

@@ -1,0 +1,22 @@
+[plugin]
+name = "Bitget (API)"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads spot and futures history through Bitget's tax endpoints. Spot reaches back to the account's start, futures about one year; the usual trade endpoint only about 100 days."
+status = "tested"
+
+[source]
+provider = "bitget"
+provider_name = "Bitget"
+kind = "exchange"
+channel = "api"
+provides_balance = true
+provides_id = true
+# Measured 2026-10-03: spot back to the first record (2024-02), futures only to 2024-09.
+# Not a fixed horizon, so not declared; coverage is taken from the delivered data.
+window_max_days = 30
+futures = true
+
+[credentials]
+fields = ["api_key", "api_secret", "api_passphrase"]
+secret = ["api_secret", "api_passphrase"]

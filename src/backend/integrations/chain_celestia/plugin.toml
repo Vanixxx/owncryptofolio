@@ -1,0 +1,21 @@
+[plugin]
+name = "Celestia"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads TIA transfers, IBC coins and staking rewards of an address through public REST nodes (free, no key)."
+status = "beta"
+
+[source]
+provider = "celestia"
+provider_name = "Celestia"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["History older than the public nodes keep (usually a few months): the balance check shows the gap", "Pending (unclaimed) staking rewards", "Slashing", "Tokens other than the chain's coin and IBC coins (factory, CW20)"]
+
+[chain]
+native_asset = "TIA"
+decimals = 6
+address_pattern = "^celestia1[02-9ac-hj-np-z]{38}$"
+explorer = "https://rest.cosmos.directory/celestia"

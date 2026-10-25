@@ -1,0 +1,23 @@
+[plugin]
+name = "Tron"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads TRX, TRC-10 and TRC-20 tokens (e.g. USDT) and voting rewards of an address through TronGrid (free; a key only raises the limits)."
+status = "beta"
+
+[source]
+provider = "tron"
+provider_name = "Tron"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["NFTs (TRC-721)", "Energy rental and DeFi positions"]
+
+[chain]
+native_asset = "TRX"
+decimals = 6
+address_pattern = "^T[1-9A-HJ-NP-Za-km-z]{33}$"
+explorer = "https://api.trongrid.io"
+service = "trongrid"
+service_optional = true

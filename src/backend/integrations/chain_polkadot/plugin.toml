@@ -1,0 +1,21 @@
+[plugin]
+name = "Polkadot"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads DOT transfers of an address on the Relay Chain and the Asset Hub through Statescan (free, no key)."
+status = "tested"
+
+[source]
+provider = "polkadot"
+provider_name = "Polkadot"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["Fees of failed transfers", "Other assets on the Asset Hub (USDT, USDC)", "Staking rewards"]
+
+[chain]
+native_asset = "DOT"
+decimals = 10
+address_pattern = "^1[1-9A-HJ-NP-Za-km-z]{45,47}$"
+explorer = "https://polkadot-api.statescan.io"

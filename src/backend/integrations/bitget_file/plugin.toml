@@ -1,0 +1,22 @@
+[plugin]
+name = "Bitget (file)"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads the Bitget order-history export (ZIP): spot trades, transactions, deposits/withdrawals, futures ledger and closed positions."
+status = "tested"
+
+[source]
+provider = "bitget"
+provider_name = "Bitget"
+kind = "exchange"
+channel = "file"
+provides_balance = false
+provides_id = true
+futures = true
+expected_files = ["Bitget export ZIP (Order-Verlauf exportieren …zip)"]
+not_read = [
+  "Spot order history (contains cancelled orders)",
+  "Futures order history and order details (covered by ledger and positions)",
+  "Futures margin adjustments without cash flow (adjust_margin_ifm, adjust_down_leverage)",
+  "Margin, Earn and unified-account files",
+]

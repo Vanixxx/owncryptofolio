@@ -1,0 +1,21 @@
+[plugin]
+name = "NEAR"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads NEAR and NEP-141 token transfers of an account through FastNEAR (free, no key); balances through the public RPC."
+status = "beta"
+
+[source]
+provider = "near"
+provider_name = "NEAR"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["NFTs", "Staking rewards as income: stake and withdraw show as sent to and received from the pool", "Tokens without NEP-141 events"]
+
+[chain]
+native_asset = "NEAR"
+decimals = 24
+address_pattern = "^[a-z0-9][a-z0-9._-]{1,63}$"
+explorer = "https://tx.main.fastnear.com"
