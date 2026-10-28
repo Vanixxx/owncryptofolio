@@ -95,5 +95,6 @@ jobs:
           docker logs app 2>&1 | tail -30
           curl -fsS http://127.0.0.1:8080/api/health
           docker exec app sh -c 'ps -o user= -p 1 2>/dev/null || stat -c %u /proc/1'
-          test "$(stat -c %u:%g "$RUNNER_TEMP/fresh/data/secrets/keys.json")" = "99:100"
+          # the secrets folder is 700 for the app user: only root may look inside
+          test "$(sudo stat -c %u:%g "$RUNNER_TEMP/fresh/data/secrets/keys.json")" = "99:100"
           test "$(docker exec app stat -c %u /proc/1)" = "99"
