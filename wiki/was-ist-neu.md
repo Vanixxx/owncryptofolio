@@ -1,6 +1,6 @@
 ---
 titel: Was ist neu
-aktualisiert: 2026-10-25
+aktualisiert: 2026-10-28
 ---
 
 # Was ist neu
@@ -11,6 +11,19 @@ Die technische Fassung mit allen Änderungen steht in [`CHANGELOG.md`](../CHANGE
 Changelogs der einzelnen Programmteile.
 
 ---
+
+## v1.8.1.0 — 28. Oktober 2026
+
+**Bestände: Kursänderung auch als Betrag.**
+
+- Ein Tipp auf die Änderung im Zeitraum (z. B. „+14,7 % · 24 Std.“) zeigt bei allen Coins, wie viel
+  dein Bestand dadurch in Euro bzw. Dollar gewonnen oder verloren hat; ein Uhr-Symbol steht dann für
+  den gewählten Zeitraum. Neu sortierbar nach **Wertänderung im Zeitraum**.
+- **Erster Start repariert:** Legte Docker oder Unraid die Ordner für Daten und Sicherungen erst
+  an, konnte owncryptofolio dort nicht schreiben und startete nicht. Neu in der Unraid-Vorlage:
+  `PUID`/`PGID` (99/100).
+- Unraid zeigt das App-Icon jetzt auch, wenn der Container gerade aus ist.
+- Aktualisierte Bibliotheken, darunter eine Sicherheitskorrektur für das Entwicklungswerkzeug Vite.
 
 ## v1.8.0.0 — 25. Oktober 2026
 

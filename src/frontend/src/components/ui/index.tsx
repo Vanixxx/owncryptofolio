@@ -54,8 +54,10 @@ export function PageHeader({ title, subtitle, aside }: { title: string; subtitle
   )
 }
 
-export function Segmented<T extends string>({ options, value, onChange, label }: {
+export function Segmented<T extends string>({ options, value, onChange, label, dense }: {
   options: { value: T; label: ReactNode }[]; value: T; onChange: (v: T) => void; label: string
+  /** narrower buttons on the phone, so one more symbol still fits in one line */
+  dense?: boolean
 }) {
   return (
     <div role="group" aria-label={label} className="inline-flex flex-wrap gap-0.5 justify-self-start rounded-ctl bg-surface-2 p-[3px]">
@@ -66,7 +68,7 @@ export function Segmented<T extends string>({ options, value, onChange, label }:
           aria-pressed={o.value === value}
           onClick={() => onChange(o.value)}
           className={cx(
-            'rounded-ctl border-0 px-3 py-1.5 text-[0.82rem]',
+            'rounded-ctl border-0 py-1.5 text-[0.82rem]', dense ? 'px-2.5 sm:px-3' : 'px-3',
             o.value === value ? 'accent-fill font-semibold' : 'bg-transparent text-muted hover:text-fg',
           )}
         >

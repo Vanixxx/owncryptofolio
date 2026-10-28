@@ -3,6 +3,7 @@
 *
 !src/backend
 !src/frontend
+!src/docker
 !LICENSE
 !THIRD-PARTY-NOTICES.md
 

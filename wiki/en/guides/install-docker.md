@@ -1,6 +1,6 @@
 ---
 title: Installing with Docker
-updated: 2026-10-25
+updated: 2026-10-28
 ---
 
 # Installing with Docker
@@ -106,6 +106,7 @@ Everything else you set in the interface. At start, the container only needs the
 | `DATABASE_URL` | yes¹ | — | one line instead of the five settings above: `postgresql+psycopg://benutzer:passwort@host:5432/owncryptofolio`; takes precedence |
 | `BACKUP_DIR` | no | `/backups` | fixed in the image — do not change it; mount a folder at `/backups` instead |
 | `TZ` | no | UTC | the container's time zone (timestamps in the log); the interface's time zone is set in the settings |
+| `PUID`, `PGID` | no | `1000` | the user and group the app runs as (usual on Unraid: `99` and `100`); at start that user gets the folders `/data` and `/backups` if they are not theirs yet |
 | `DB_WAIT_SECONDS` | no | `60` | how long the start waits for a database that is not ready yet |
 | `CREDENTIALS_KEY`, `SESSION_KEY`, `BACKUP_KEY` | no | generated | your own keys instead of the ones generated on first start (advanced users only; otherwise they live in the data folder) |
 
@@ -157,7 +158,8 @@ under **System status**.
 - **Run it on your home network only.** If owncryptofolio should be reachable from outside,
   put a reverse proxy with HTTPS in front of it (e.g. Caddy, Traefik, Nginx Proxy Manager) —
   better still, a VPN.
-- The container does not run as root and listens on port **8080** inside.
+- The app does not run as root (user `PUID`, default 1000) and listens on port **8080** inside.
+  Only the very first step of the start runs as root: it hands the mounted folders to that user.
 - **PostgreSQL up to version 18**: the backup tools in the image belong to version 18. If the
   database server is newer, System status reports them as too old, and no backup is made.
 - The **setup code** (only needed if there are already keys in the data folder) is shown by

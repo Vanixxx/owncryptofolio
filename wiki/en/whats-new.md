@@ -1,6 +1,6 @@
 ---
 title: What's new
-updated: 2026-10-25
+updated: 2026-10-28
 ---
 
 # What's new
@@ -11,6 +11,19 @@ The technical version with every change is in [`CHANGELOG.md`](../../CHANGELOG.m
 changelogs of the individual parts of the program.
 
 ---
+
+## v1.8.1.0 — 28 October 2026
+
+**Holdings: price change as an amount too.**
+
+- Tapping the change over the period (e.g. “+14.7 % · 24 h”) shows for every coin how much your
+  holding gained or lost by it in euros or dollars; a clock then stands for the chosen period. New
+  sort option **Value change in period**.
+- **First start fixed:** if Docker or Unraid only created the folders for data and backups,
+  owncryptofolio could not write there and did not start. New in the Unraid template:
+  `PUID`/`PGID` (99/100).
+- Unraid now shows the app icon even while the container is stopped.
+- Updated libraries, including a security fix for the development tool Vite.
 
 ## v1.8.0.0 — 25 October 2026
 

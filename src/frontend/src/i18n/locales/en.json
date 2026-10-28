@@ -1252,10 +1252,12 @@
       "realized": "Realized",
       "days": "Time held",
       "change": "Price change in period",
+      "change_value": "Value change in period",
       "name": "Name"
     },
     "search": "Search coin …",
     "dcaShort": "DCA",
+    "changeFlip": "Tap: change in % or as an amount (for every coin)",
     "chart": "Chart",
     "noPrices": "No prices for this coin.",
     "taxFree": "Holding period",

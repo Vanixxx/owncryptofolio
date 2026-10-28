@@ -1,6 +1,6 @@
 ---
 title: Dashboard and holdings
-updated: 2026-10-25
+updated: 2026-10-28
 ---
 
 # Dashboard and holdings
@@ -73,7 +73,9 @@ The **Holdings** page has three tabs.
 For each coin you see the quantity, value, profit or loss in money and percent, and its
 share of the portfolio as a bar. On a PC you also get the curve of the chosen period
 (today, 24 h, 7, 30 or 90 days) with the change in %, the price and the DCA (avg. buy price)
-in their own columns. At the top you find a coin through the search. Clicking the coin
+in their own columns. **Tapping the change** switches every coin between percent and amount:
+it then shows how much your current holding gained or lost through the price over the period
+(in euros or dollars). A small clock then stands before the amount and on the chosen period. At the top you find a coin through the search. Clicking the coin
 opens it with three tabs:
 
 <p>
@@ -112,7 +114,7 @@ filtered by the coin.
 - **Sent, open**: this much went out without a counterpart and no longer counts as held.
 
 With **Sort by** you order the list by value, profit/loss (also in percent), realized,
-price change in period, holding time or name; the arrow next to it reverses the order.
+price change in period, value change in period (the amount above), holding time or name; the arrow next to it reverses the order.
 
 "Show sold" brings in coins you no longer hold, with their realized result.
 

@@ -4,6 +4,32 @@ Technische Fassung. Die Anwendersicht steht in [`wiki/was-ist-neu.md`](wiki/was-
 Versionsschema `0.MAJOR.MINOR.PATCH` (ADR 0007, ADR 0009). Neustart am 2026-10-02
 (ADR 0024); die Fassung davor bis `v0.7.0.0` ist nicht Teil dieses Repos.
 
+## v1.8.1.0 — 2026-10-28 · Bestände als Betrag, erster Start, Updates
+
+**Neu**
+
+- Bestände: Ein Tipp auf die Veränderung im Zeitraum schaltet bei allen Coins zwischen % und
+  Betrag um (Kursänderung auf den heutigen Bestand, in der Anzeigewährung; gemerkt im Browser).
+  Neue Sortierung „Wertänderung im Zeitraum“.
+
+**Behoben**
+
+- Erster Start ohne vorhandene Ordner: Docker bzw. Unraid legen fehlende Ordner für `/data` und
+  `/backups` als root an, die App (Benutzer 1000) konnte dort ihre Schlüssel nicht schreiben und
+  startete nicht. Ein Startschritt übergibt die Ordner jetzt an den App-Benutzer und gibt root
+  danach ab (`setpriv`). Neu: `PUID`/`PGID` (Unraid-Vorlage: 99/100). Bestehende Installationen
+  ändern sich nicht. Die CI startet das Abbild jetzt einmal echt mit frischen Ordnern.
+
+**Geändert**
+
+- Abhängigkeiten (Dependabot): Vite 8.3.5 (behebt 6 Warnungen, nur Entwicklungsserver), React
+  19.3.1, react-router 8.5, i18next 26.5, lucide 1.61, vitest 5.0.5, oxlint 1.89; FastAPI 0.161,
+  SQLAlchemy 2.1.6, Alembic 1.20.1, pydantic-settings 2.16.1, httpx2 2.16, ruff 0.17.2; GitHub
+  Actions checkout/setup-node v7, buildx/QEMU v4, build-push v7. Zurückgehalten: TypeScript 7,
+  `@types/node` 26, Node 26 im Bau.
+- Unraid: Das App-Icon im Docker-Reiter kommt von GitHub (192 px), auch wenn der Container
+  gerade nicht läuft; `build.sh` nimmt das in den Einstellungen gewählte Icon.
+
 ## v1.8.0.0 — 2026-10-25 · Veröffentlichung
 
 **Neu**

@@ -33,7 +33,7 @@ jobs:
       run:
         working-directory: src/backend
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       # backups call pg_dump/pg_restore of the server's major version
       - name: PostgreSQL 18 client
         run: |
@@ -56,8 +56,8 @@ jobs:
       run:
         working-directory: src/frontend
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -70,11 +70,30 @@ jobs:
   image:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: docker/setup-buildx-action@v3
-      - uses: docker/build-push-action@v6
+      - uses: actions/checkout@v7
+      - uses: docker/setup-buildx-action@v4
+      - uses: docker/build-push-action@v7
         with:
           context: .
           file: src/Dockerfile
           push: false
+          load: true
+          tags: owncryptofolio:ci
           build-args: APP_VERSION=0.0.0-ci
+      # a first start as a new user has it: folders Docker creates as root, Unraid's 99:100
+      - name: Start test
+        run: |
+          docker network create ocf
+          docker run -d --name db --network ocf -e POSTGRES_PASSWORD=ci postgres:18
+          docker run -d --name app --network ocf -p 8080:8080 \
+            -e DB_HOST=db -e DB_USER=postgres -e DB_PASSWORD=ci -e PUID=99 -e PGID=100 \
+            -v "$RUNNER_TEMP/fresh/data:/data" -v "$RUNNER_TEMP/fresh/backups:/backups" owncryptofolio:ci
+          for i in $(seq 60); do
+            curl -fsS http://127.0.0.1:8080/api/health && break
+            sleep 3
+          done
+          docker logs app 2>&1 | tail -30
+          curl -fsS http://127.0.0.1:8080/api/health
+          docker exec app sh -c 'ps -o user= -p 1 2>/dev/null || stat -c %u /proc/1'
+          test "$(stat -c %u:%g "$RUNNER_TEMP/fresh/data/secrets/keys.json")" = "99:100"
+          test "$(docker exec app stat -c %u /proc/1)" = "99"

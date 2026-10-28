@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <!-- Unraid template for the published image (Community Applications, or copied by hand to
-     /boot/config/plugins/dockerMan/templates-user/my-owncryptofolio.xml). -->
+     /boot/config/plugins/dockerMan/templates-user/my-owncryptofolio.xml). The copy in
+     github.com/Vanixxx/unraid-templates differs only in TemplateURL. -->
 <Container version="2">
   <Name>owncryptofolio</Name>
   <Repository>ghcr.io/vanixxx/owncryptofolio:latest</Repository>
@@ -15,7 +16,13 @@
   <Category>Tools: Productivity:</Category>
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/Vanixxx/owncryptofolio/main/src/deploy/unraid/template.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/Vanixxx/owncryptofolio/main/src/frontend/public/app-icons/E5-512.png</Icon>
+  <Icon>https://raw.githubusercontent.com/Vanixxx/owncryptofolio/main/src/frontend/public/app-icons/E5-192.png</Icon>
+  <ReadMe>https://github.com/Vanixxx/owncryptofolio/blob/main/wiki/en/guides/install-unraid.md</ReadMe>
+  <ExtraSearchTerms>crypto bitcoin portfolio tracker tax steuer finance</ExtraSearchTerms>
+  <License>AGPL-3.0</License>
+  <Screenshot>https://raw.githubusercontent.com/Vanixxx/owncryptofolio/main/wiki/bilder/en/pc-dashboard.jpg</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/Vanixxx/owncryptofolio/main/wiki/bilder/en/pc-steuer.jpg</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/Vanixxx/owncryptofolio/main/wiki/bilder/en/handy-bestaende-transaktionen.jpg</Screenshot>
   <ExtraParams>--restart=unless-stopped</ExtraParams>
   <PostArgs/>
   <CPUset/>
@@ -31,5 +38,7 @@
   <Config Name="Database: name" Target="DB_NAME" Default="owncryptofolio" Mode="" Description="Created on the first start if missing" Type="Variable" Display="always" Required="true" Mask="false">owncryptofolio</Config>
   <Config Name="Database: user" Target="DB_USER" Default="postgres" Mode="" Description="Needs the right to create a database (CREATEDB)" Type="Variable" Display="always" Required="true" Mask="false">postgres</Config>
   <Config Name="Database: password" Target="DB_PASSWORD" Default="" Mode="" Description="" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User the app runs as; 99 = nobody (Unraid default)" Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group the app runs as; 100 = users (Unraid default)" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
   <Config Name="Time zone" Target="TZ" Default="Europe/Berlin" Mode="" Description="Time stamps in the log; the interface has its own setting" Type="Variable" Display="advanced" Required="false" Mask="false">Europe/Berlin</Config>
 </Container>

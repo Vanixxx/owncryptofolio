@@ -1,6 +1,6 @@
-import { ArrowLeftRight, ChevronDown, LineChart } from 'lucide-react'
+import { ArrowLeftRight, ChevronDown, History, LineChart } from 'lucide-react'
 import { Link } from 'react-router'
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState, type MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CoinIcon } from '../../components/CoinIcon'
 import { SourceAvatar } from '../../components/SourceLogo'
@@ -22,9 +22,9 @@ import type { SourceRef } from '../../lib/txFilter'
 import { date, money, percent, priceText, quantity, trend } from '../../lib/format'
 import { Kpi } from './Kpi'
 import { Sparkline } from '../prices/Sparkline'
-import { ChangeText, SPANS, change } from '../prices/Prices'
+import { ChangeText, SPANS, change, valueChange } from '../prices/Prices'
 
-const SORT_KEYS = ['value', 'unrealized', 'unrealized_pct', 'realized', 'change', 'days', 'name'] as const
+const SORT_KEYS = ['value', 'unrealized', 'unrealized_pct', 'realized', 'change', 'change_value', 'days', 'name'] as const
 type SortKey = (typeof SORT_KEYS)[number]
 
 export function SpotList({ summary: s, items, name, lookup, tz }: {
@@ -43,6 +43,7 @@ export function SpotList({ summary: s, items, name, lookup, tz }: {
     unrealized_pct: (h) => (h.unrealized_pct === null ? null : Number(h.unrealized_pct)),
     realized: (h) => Number(h.realized),
     change: (h) => change(prices[h.asset], span),
+    change_value: (h) => valueChange(h.value, change(prices[h.asset], span)),
     days: (h) => h.days_held,
     name: (h) => h.asset,
   }
@@ -54,6 +55,15 @@ export function SpotList({ summary: s, items, name, lookup, tz }: {
     try { const v = localStorage.getItem('holdings-span') as ChangeSpan | null; return v && SPANS.includes(v) ? v : 'd90' } catch { return 'd90' }
   })
   const setSpan = (v: ChangeSpan) => { setSpanState(v); try { localStorage.setItem('holdings-span', v) } catch { /* private mode */ } }
+  // the change in % or as money on today's holding; a click on it switches every row
+  // (Vanixxx, 2026-10-28)
+  const [amount, setAmountState] = useState(() => {
+    try { return localStorage.getItem('holdings-change-amount') === '1' } catch { return false }
+  })
+  const flip = (e: MouseEvent) => {
+    e.stopPropagation() // the row button would open the details
+    setAmountState((v) => { try { localStorage.setItem('holdings-change-amount', v ? '0' : '1') } catch { /* private mode */ } return !v })
+  }
   const [prices, setPrices] = useState<Record<string, PriceAssetRow>>({})
   const [spark, setSpark] = useState<{ span: ChangeSpan; data: Record<string, string[]> } | null>(null)
   useEffect(() => {
@@ -91,8 +101,14 @@ export function SpotList({ summary: s, items, name, lookup, tz }: {
           <SearchField value={query} onChange={setQuery} placeholder={t('holdings.search')} className="w-full sm:w-56" />
           <SortSelect id="holdings-sort" value={sort} onChange={setSort}
             options={(Object.keys(pick) as SortKey[]).map((k) => ({ value: k, label: t(`holdings.sort.${k}`) }))} />
-          <Segmented label={t('prices.spanLabel')} value={span} onChange={setSpan}
-            options={SPANS.map((x) => ({ value: x, label: t(`prices.spans.${x}`) }))} />
+          <Segmented label={t('prices.spanLabel')} value={span} onChange={setSpan} dense
+            options={SPANS.map((x) => ({
+              value: x,
+              // the clock of the amounts marks the chosen span here as well
+              label: amount && x === span
+                ? <span className="inline-flex items-center gap-1"><History size={12} aria-hidden="true" />{t(`prices.spans.${x}`)}</span>
+                : t(`prices.spans.${x}`),
+            }))} />
           <span className="text-sm text-muted">{t('holdings.count', { count: held.length })}</span>
         </span>
         <ExportMenu path="/api/export/holdings" />
@@ -121,7 +137,7 @@ export function SpotList({ summary: s, items, name, lookup, tz }: {
                   </span>
                   <span className="num truncate text-xs text-muted md:hidden">{quantity(h.qty)} {h.asset}</span>
                   {/* without the curve (phone, tablet) the change over the span stands here */}
-                  <span className="lg:hidden"><ChangeText a={prices[h.asset]} span={span} /></span>
+                  <span className="lg:hidden" onClick={flip} title={t('holdings.changeFlip')}><ChangeText a={prices[h.asset]} span={span} amount={amount ? { value: h.value, currency: s.currency } : undefined} /></span>
                   {/* the share of the portfolio as a thin bar: the big positions stand out */}
                   <span className="mt-0.5 h-1 w-full max-w-40 overflow-hidden rounded-full bg-surface-2" aria-hidden="true">
                     <span className="accent-fill block h-full rounded-full" style={{ width: `${Math.min(100, share)}%` }} />
@@ -131,7 +147,7 @@ export function SpotList({ summary: s, items, name, lookup, tz }: {
                     PC only (Vanixxx, 2026-10-14/21) */}
                 <span className="hidden justify-items-start gap-0.5 lg:grid">
                   <Sparkline values={curve(h.asset)} up={rising(h.asset)} />
-                  <ChangeText a={prices[h.asset]} span={span} />
+                  <span onClick={flip} title={t('holdings.changeFlip')}><ChangeText a={prices[h.asset]} span={span} amount={amount ? { value: h.value, currency: s.currency } : undefined} /></span>
                 </span>
                 <span className="hidden justify-items-end md:grid">
                   <span className="num text-sm">{quantity(h.qty)}</span>

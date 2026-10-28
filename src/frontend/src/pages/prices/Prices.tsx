@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUp, ChevronDown, Plus, RefreshCw, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, ChevronDown, History, Plus, RefreshCw, Trash2 } from 'lucide-react'
 import { lazy, Suspense, useCallback, useEffect, useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router'
@@ -12,7 +12,7 @@ import {
 } from '../../lib/api'
 import { locale } from '../../i18n'
 import { cx } from '../../lib/cx'
-import { date, dateTime, priceText } from '../../lib/format'
+import { date, dateTime, money, priceText } from '../../lib/format'
 import { useErrorText, useMessageText } from '../../lib/useErrorText'
 import { Sparkline } from './Sparkline'
 import { LogoUpload } from '../../components/LogoUpload'
@@ -37,13 +37,34 @@ export function change(a: Pick<PriceAssetRow, 'changes'> | undefined, span: Chan
   return v === undefined || v === null ? null : Number(v)
 }
 
-export function ChangeText({ a, span }: { a: Pick<PriceAssetRow, 'changes'> | undefined; span: ChangeSpan }) {
+/** What the price change over the span made of today's holding, in the display currency:
+ * value now minus the same quantity at the price back then (value / (1 + change)). */
+export function valueChange(value: string | null | undefined, c: number | null): number | null {
+  if (value === null || value === undefined || value === '' || c === null || c <= -100) return null
+  return Number(value) * c / (100 + c)
+}
+
+/** The change over the span; with `amount` the same change as money on today's holding
+ * instead of in % (holdings, Vanixxx 2026-10-28). */
+export function ChangeText({ a, span, amount }: {
+  a: Pick<PriceAssetRow, 'changes'> | undefined; span: ChangeSpan
+  amount?: { value: string | null; currency: string }
+}) {
   const { t } = useTranslation()
   const c = change(a, span)
   if (c === null) return null
+  const delta = amount ? valueChange(amount.value, c) : null
   return (
-    <span className={cx('num text-[0.7rem]', c > 0 ? 'text-up' : c < 0 ? 'text-down' : 'text-muted')}>
-      {c > 0 && '+'}{c.toLocaleString(locale(), { maximumFractionDigits: 1, minimumFractionDigits: 1 })} % · {t(`prices.spans.${span}`)}
+    <span className={cx('num whitespace-nowrap text-[0.7rem]', c > 0 ? 'text-up' : c < 0 ? 'text-down' : 'text-muted')}>
+      {/* as money a clock stands for the span (named in the selector above), so the line stays
+          short on the phone (Vanixxx, 2026-10-28) */}
+      {amount && delta !== null
+        ? <span className="inline-flex items-center gap-1">
+            <History size={11} aria-hidden="true" className="shrink-0 opacity-80" />
+            {money(String(delta), amount.currency, true)}
+            <span className="sr-only">{t(`prices.spans.${span}`)}</span>
+          </span>
+        : <>{c > 0 && '+'}{c.toLocaleString(locale(), { maximumFractionDigits: 1, minimumFractionDigits: 1 })} % · {t(`prices.spans.${span}`)}</>}
     </span>
   )
 }

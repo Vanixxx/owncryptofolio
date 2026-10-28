@@ -42,14 +42,18 @@ LABEL org.opencontainers.image.title="owncryptofolio" \
       org.opencontainers.image.licenses="AGPL-3.0-only" \
       org.opencontainers.image.version=$APP_VERSION
 
-# Not root: two lines, and the service is reachable from the network (ADR 0016).
-RUN useradd --system --uid 1000 --home /app app && mkdir -p /data /backups && chown app /data /backups
-USER app
+# Not root: the app runs as its own user (ADR 0016). The entrypoint starts as root only to
+# hand mounted folders to that user (PUID/PGID), then drops root before the app starts.
+RUN groupadd --system --gid 1000 app \
+ && useradd --system --uid 1000 --gid 1000 --home /app app && mkdir -p /data /backups && chown app:app /data /backups
+COPY --chmod=755 src/docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+ENV HOME=/app
 VOLUME /data
 EXPOSE 8080
 # Docker's own check uses the same probe as the UI: a real database round trip.
 HEALTHCHECK --interval=60s --timeout=10s --start-period=120s --retries=3 \
     CMD python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/api/health', timeout=8).status == 200 else 1)"
 # First start runs inside the app: wait for DB, create, migrate, keys (ADR 0030).
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", \
      "--proxy-headers", "--forwarded-allow-ips", "*"]

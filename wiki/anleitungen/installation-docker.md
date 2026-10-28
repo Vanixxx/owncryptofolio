@@ -1,6 +1,6 @@
 ---
 titel: Installation mit Docker
-aktualisiert: 2026-10-25
+aktualisiert: 2026-10-28
 ---
 
 # Installation mit Docker
@@ -107,6 +107,7 @@ Angaben:
 | `DATABASE_URL` | ja¹ | — | statt der fünf Angaben oben eine Zeile: `postgresql+psycopg://benutzer:passwort@host:5432/owncryptofolio`; geht vor |
 | `BACKUP_DIR` | nein | `/backups` | im Abbild fest eingestellt — nicht ändern, sondern einen Ordner an `/backups` einbinden |
 | `TZ` | nein | UTC | Zeitzone des Containers (Zeitstempel im Protokoll); die Zeitzone der Oberfläche stellst du in den Einstellungen ein |
+| `PUID`, `PGID` | nein | `1000` | unter welchem Benutzer und welcher Gruppe die App läuft (auf Unraid üblich: `99` und `100`); die Ordner `/data` und `/backups` bekommt dieser Benutzer beim Start, wenn sie ihm noch nicht gehören |
 | `DB_WAIT_SECONDS` | nein | `60` | so lange wartet der Start auf eine noch nicht bereite Datenbank |
 | `CREDENTIALS_KEY`, `SESSION_KEY`, `BACKUP_KEY` | nein | erzeugt | eigene Schlüssel statt der beim ersten Start erzeugten (nur für Fortgeschrittene; sonst liegen sie im Datenordner) |
 
@@ -159,7 +160,9 @@ steht unter **Systemzustand**.
 - **Nur im Heimnetz betreiben.** Soll owncryptofolio von außen erreichbar sein, gehört ein
   Reverse Proxy mit HTTPS davor (z. B. Caddy, Traefik, Nginx Proxy Manager) — besser noch ein
   VPN.
-- Der Container läuft nicht als root und hört intern auf Port **8080**.
+- Die App läuft nicht als root (Benutzer `PUID`, Standard 1000) und hört intern auf Port **8080**.
+  Nur der allererste Schritt beim Start läuft als root: Er übergibt die eingebundenen Ordner an
+  diesen Benutzer.
 - **PostgreSQL bis Version 18**: Die Sicherungs-Werkzeuge im Abbild gehören zu Version 18. Ist
   der Datenbank-Server neuer, meldet der Systemzustand sie als zu alt, und es entsteht keine
   Sicherung.

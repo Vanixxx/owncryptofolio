@@ -1,6 +1,6 @@
 ---
 titel: Dashboard und Bestände
-aktualisiert: 2026-10-25
+aktualisiert: 2026-10-28
 ---
 
 # Dashboard und Bestände
@@ -75,7 +75,10 @@ Die Seite **Bestände** hat drei Reiter.
 Für jeden Coin siehst du Menge, Wert, Gewinn oder Verlust in Geld und Prozent sowie seinen
 Anteil am Portfolio als Balken. Am PC stehen zusätzlich die Kurve des gewählten Zeitraums (heute, 24 Std., 7, 30 oder 90 Tage) mit
 der Veränderung in %, Kurs
-und DCA (Ø-Kaufpreis) in eigenen Spalten. Oben findest du einen Coin über die Suche. Ein Klick auf den Coin öffnet ihn mit
+und DCA (Ø-Kaufpreis) in eigenen Spalten. Ein **Tipp auf die Veränderung** schaltet bei allen
+Coins zwischen Prozent und Betrag um: dann steht dort, wie viel dein heutiger Bestand durch den
+Kurs im Zeitraum gewonnen oder verloren hat (in Euro bzw. Dollar). Ein kleines Uhr-Symbol steht
+dann vor dem Betrag und beim gewählten Zeitraum. Oben findest du einen Coin über die Suche. Ein Klick auf den Coin öffnet ihn mit
 drei Reitern:
 
 <p>
@@ -114,7 +117,8 @@ dort schon nach dem Coin gefiltert.
 - **Offen versendet**: so viel ging ohne Gegenstück hinaus und zählt nicht mehr zum Bestand.
 
 Über **Sortieren nach** ordnest du die Liste nach Wert, Gewinn/Verlust (auch in Prozent),
-Realisiert, Kursänderung im Zeitraum, Besitzdauer oder Name; der Pfeil daneben dreht die Reihenfolge um.
+Realisiert, Kursänderung im Zeitraum, Wertänderung im Zeitraum (der Betrag von oben), Besitzdauer
+oder Name; der Pfeil daneben dreht die Reihenfolge um.
 
 „Verkaufte zeigen“ blendet Coins ein, die du nicht mehr hast, mit ihrem realisierten
 Ergebnis.

@@ -1252,10 +1252,12 @@
       "realized": "Realisiert",
       "days": "Besitzdauer",
       "change": "Kursänderung im Zeitraum",
+      "change_value": "Wertänderung im Zeitraum",
       "name": "Name"
     },
     "search": "Coin suchen …",
     "dcaShort": "DCA",
+    "changeFlip": "Antippen: Änderung in % oder als Betrag (für alle Coins)",
     "chart": "Graph",
     "noPrices": "Für diesen Coin gibt es keine Kurse.",
     "taxFree": "Haltefrist",
