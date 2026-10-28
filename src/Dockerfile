@@ -5,7 +5,7 @@
 # (the root .dockerignore lets only src/ and the licences through)
 
 # The frontend is plain files: built once on the build machine, shared by every platform.
-FROM --platform=$BUILDPLATFORM node:24.21-slim AS frontend
+FROM --platform=$BUILDPLATFORM node:26.11-slim AS frontend
 WORKDIR /build
 COPY src/frontend/package.json src/frontend/package-lock.json ./
 RUN npm ci
