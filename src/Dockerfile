@@ -12,7 +12,7 @@ RUN npm ci
 COPY src/frontend/ ./
 RUN npm run build
 
-FROM python:3.13-slim AS runtime
+FROM python:3.15-slim AS runtime
 # Backups call pg_dump/pg_restore/psql (ADR 0018); the client must be at least the server's
 # major version (PostgreSQL 18 on Unraid), so it comes from the PostgreSQL repository.
 ARG PG_MAJOR=18
