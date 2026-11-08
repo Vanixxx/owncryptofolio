@@ -1,6 +1,6 @@
 ---
 titel: Installation und Update auf Unraid
-aktualisiert: 2026-10-25
+aktualisiert: 2026-10-29
 ---
 
 # Installation und Update auf Unraid
@@ -20,7 +20,7 @@ ersten Start selbst an.
 
 **Über Apps:** nach **owncryptofolio** suchen und **Installieren**.
 
-**Solange es dort noch nicht steht:** die Vorlage einmal von Hand holen. Im Unraid-Terminal
+**Ohne Apps** (oder falls die Suche es nicht findet): die Vorlage einmal von Hand holen. Im Unraid-Terminal
 (oben rechts das `>_`-Symbol):
 
 ```

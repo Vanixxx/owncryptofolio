@@ -59,6 +59,7 @@ Beispielen geprüft, aber noch nicht an einem eigenen Konto — rufe ab und scha
 | Osmosis | — | Beta |
 | Polkadot | — | getestet |
 | Polygon | Etherscan (kostenlos), nötig | getestet |
+| Qubic | — | Beta |
 | Ronin | — | getestet |
 | Solana | — | getestet |
 | Sonic | Etherscan (kostenlos), nötig | getestet |
@@ -71,6 +72,11 @@ Beispielen geprüft, aber noch nicht an einem eigenen Konto — rufe ab und scha
 | XRP Ledger | — | Beta |
 | zkSync Era | — | Beta |
 | Netzwerk ohne Anbindung | — | getestet |
+
+**Qubic:** Gelesen werden QUBIC-Überweisungen ab dem 10.04.2024 und ab dem 01.04.2026 auch
+Auszahlungen von Smart Contracts. Ältere Vertragszuflüsse und alles vor April 2024 bietet das
+Netzwerk nicht mehr an, Token (QX) werden nicht gelesen. Bei einer älteren Wallet zeigt dann der
+Bestandsabgleich eine Abweichung; trag das Fehlende von Hand nach.
 
 **Weitere 56 Börsen über ccxt** (API-Abruf, alle Beta):
 

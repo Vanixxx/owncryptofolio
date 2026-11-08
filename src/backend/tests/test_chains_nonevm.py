@@ -582,3 +582,112 @@ def test_solana_transaction_the_node_does_not_deliver_is_an_error(monkeypatch):
     monkeypatch.setattr(reader, "_rpc", lambda method, params: None)
     with pytest.raises(chain.ChainUnavailable, match="not delivered"):
         reader.transactions("addr")
+
+
+def _qubic_tx(hash_, source, destination, amount, tick=1000, flew=True):
+    return {
+        "hash": hash_,
+        "source": source,
+        "destination": destination,
+        "amount": str(amount),
+        "tickNumber": tick,
+        "timestamp": "1712921096000",
+        "moneyFlew": flew,
+    }
+
+
+def _qubic_event(log_id, source, destination, amount, hash_="T1", tick=48160001):
+    return {
+        "epoch": 207,
+        "tickNumber": tick,
+        "timestamp": "1775045979000",
+        "transactionHash": hash_,
+        "logId": str(log_id),
+        "quTransfer": {"source": source, "destination": destination, "amount": str(amount)},
+    }
+
+
+def test_qubic_transactions_until_the_events_begin_then_every_event_counts():
+    from integrations.chain_qubic import reader
+
+    txs = [
+        _qubic_tx("A", OTHER, ME, 100),
+        _qubic_tx("B", ME, OTHER, 40),
+        _qubic_tx("C", ME, OTHER, 7, flew=False),  # no money moved
+        _qubic_tx("D", ME, OTHER, 0),  # a contract call without money
+        _qubic_tx("E", ME, OTHER, 9, tick=reader.EVENTS_FROM),  # an event tells that one
+    ]
+    logs = [
+        _qubic_event(1, ME, OTHER, 9, hash_="T1"),  # a failed call: out and back, same hash
+        _qubic_event(2, OTHER, ME, 9, hash_="T1"),
+        _qubic_event(3, OTHER, ME, 5, hash_=""),  # a payout no transaction shows
+        _qubic_event(4, OTHER, ME, 8, tick=reader.EVENTS_FROM - 1),
+        _qubic_event(5, OTHER, ME, 6, hash_="T2"),  # alone: the hash an exchange names
+    ]
+    moves = reader.convert(ME, txs, logs)
+
+    assert [m.kind for m in moves] == [
+        Kind.RECEIVE,
+        Kind.SEND,
+        Kind.SEND,
+        Kind.RECEIVE,
+        Kind.RECEIVE,
+        Kind.RECEIVE,
+    ]
+    assert [m.external_id for m in moves] == ["A", "B", "T1:1", "T1:2", "epoch207:3", "T2"]
+    assert moves[0].incoming_asset == "QUBIC" and moves[0].incoming_amount == Decimal(100)
+    assert moves[1].counterparty == OTHER and moves[1].fee_amount is None
+
+
+def test_qubic_goes_past_the_query_limit_from_the_lowest_tick(monkeypatch):
+    from app.modules.plugins import chain
+    from integrations.chain_qubic import reader
+
+    monkeypatch.setattr(reader, "PAUSE", 0)
+    monkeypatch.setattr(reader, "PAGE", 2)
+    monkeypatch.setattr(reader, "LIMIT", 4)
+    ticks = [9, 8, 7, 6, 6, 5]
+    seen = []
+
+    def answer(url, body):
+        upper = body["ranges"]["tickNumber"]["lte"]
+        seen.append(upper)
+        left = [t for t in ticks if t <= int(upper)]
+        at = body["pagination"]["offset"]
+        return {
+            "transactions": [_qubic_tx(f"H{t}", ME, OTHER, 1, tick=t) for t in left[at : at + 2]]
+        }
+
+    monkeypatch.setattr(chain, "http_json", answer)
+    assert {r["hash"] for r in reader.transactions(ME)} == {f"H{t}" for t in (9, 8, 7, 6, 5)}
+    assert seen == ["48159999", "48159999", "6", "6"]
+
+
+def test_qubic_stops_when_one_tick_fills_the_query(monkeypatch):
+    import pytest
+
+    from app.modules.plugins import chain
+    from integrations.chain_qubic import reader
+
+    monkeypatch.setattr(reader, "PAUSE", 0)
+    monkeypatch.setattr(reader, "PAGE", 1)
+    monkeypatch.setattr(reader, "LIMIT", 1)
+    monkeypatch.setattr(
+        chain,
+        "http_json",
+        lambda url, body: {"transactions": [_qubic_tx("X", ME, OTHER, 1, tick=6)]},
+    )
+    with pytest.raises(chain.ChainUnavailable):
+        reader.transactions(ME)
+
+
+def test_qubic_events_to_myself_count_once_and_balance_has_no_decimals(monkeypatch):
+    from app.modules.plugins import chain
+    from integrations.chain_qubic import reader
+
+    monkeypatch.setattr(reader, "PAUSE", 0)
+    answers = {"eventLogs": [_qubic_event(1, ME, ME, 3)]}
+    monkeypatch.setattr(chain, "http_json", lambda url, body=None: answers)
+    assert len(reader.events(ME)) == 1
+    monkeypatch.setattr(chain, "http_json", lambda url: {"balance": {"balance": "25670000"}})
+    assert reader.balance(ME) == [("spot", "QUBIC", Decimal(25670000))]

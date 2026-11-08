@@ -1,6 +1,6 @@
 ---
 titel: Was ist neu
-aktualisiert: 2026-10-28
+aktualisiert: 2026-11-08
 ---
 
 # Was ist neu
@@ -9,6 +9,16 @@ aktualisiert: 2026-10-28
 
 Die technische Fassung mit allen Änderungen steht in [`CHANGELOG.md`](../CHANGELOG.md) und in den
 Changelogs der einzelnen Programmteile.
+
+---
+
+## v1.8.2.0 — 8. November 2026
+
+**Neues Netzwerk: Qubic (Beta).**
+
+- Wallet-Adresse eintragen, Überweisungen und Bestand kommen automatisch, ohne Schlüssel. Ab April
+  2026 auch Auszahlungen von Smart Contracts. Grenzen stehen unter [Quellen](anleitungen/quellen.md).
+- Unraid: owncryptofolio steht in den Community Applications (Apps → Suche „owncryptofolio“).
 
 ---
 

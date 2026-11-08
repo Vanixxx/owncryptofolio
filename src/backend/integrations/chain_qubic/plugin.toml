@@ -1,0 +1,21 @@
+[plugin]
+name = "Qubic"
+author = "owncryptofolio"
+version = "1.0.0"
+description = "Reads QUBIC transfers of an identity through rpc.qubic.org (free, no key): transactions up to 2026-04-01, transfer events from then on."
+status = "beta"
+
+[source]
+provider = "qubic"
+provider_name = "Qubic"
+kind = "wallet"
+channel = "chain"
+provides_balance = true
+provides_id = true
+not_read = ["Tokens and contract shares (QX)", "Anything before 2024-04-10", "Smart contract payouts and SendMany receipts before 2026-04-01"]
+
+[chain]
+native_asset = "QUBIC"
+decimals = 0
+address_pattern = "^[A-Z]{60}$"
+explorer = "https://rpc.qubic.org"

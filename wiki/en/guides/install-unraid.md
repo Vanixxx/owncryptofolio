@@ -1,6 +1,6 @@
 ---
 title: Installing and updating on Unraid
-updated: 2026-10-25
+updated: 2026-10-29
 ---
 
 # Installing and updating on Unraid
@@ -20,7 +20,7 @@ itself on the first start.
 
 **Through Apps:** search for **owncryptofolio** and click **Install**.
 
-**As long as it is not listed there yet:** fetch the template once by hand. In the Unraid
+**Without Apps** (or if the search does not find it): fetch the template once by hand. In the Unraid
 terminal (the `>_` symbol at the top right):
 
 ```

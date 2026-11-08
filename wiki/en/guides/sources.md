@@ -59,6 +59,7 @@ examples, but not yet against an account of our own — fetch and look at the
 | Osmosis | — | beta |
 | Polkadot | — | tested |
 | Polygon | Etherscan (free), required | tested |
+| Qubic | — | beta |
 | Ronin | — | tested |
 | Solana | — | tested |
 | Sonic | Etherscan (free), required | tested |
@@ -73,6 +74,11 @@ examples, but not yet against an account of our own — fetch and look at the
 | Network without connection | — | tested |
 
 **56 more exchanges through ccxt** (API fetching, all beta):
+
+**Qubic:** the app reads QUBIC transfers from 2024-04-10 on, and smart contract payouts from
+2026-04-01 on. The network no longer offers older contract payouts or anything before April 2024,
+and tokens (QX) are not read. On an older wallet the balance check then shows a difference; enter
+what is missing by hand.
 
 | | | | |
 |---|---|---|---|

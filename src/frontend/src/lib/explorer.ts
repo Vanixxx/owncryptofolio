@@ -29,6 +29,7 @@ const TX: Record<string, string> = {
   cosmos: 'https://www.mintscan.io/cosmos/tx/{id}',
   osmosis: 'https://www.mintscan.io/osmosis/tx/{id}',
   celestia: 'https://www.mintscan.io/celestia/tx/{id}',
+  qubic: 'https://explorer.qubic.org/network/tx/{id}',
 }
 
 export function explorerUrl(provider: string | undefined, externalId: string | null): string | null {
@@ -43,6 +44,7 @@ export function explorerUrl(provider: string | undefined, externalId: string | n
   }
   // a Tezos token transfer names its operation by number only; TON hashes come as base64
   if (provider === 'tezos' && id.startsWith('op')) return null
+  if (provider === 'qubic' && id.startsWith('epoch')) return null // a Qubic payout without a transaction
   if (provider === 'ton') {
     try { id = Array.from(atob(id.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0).toString(16).padStart(2, '0')).join('') } catch { return null }
   }

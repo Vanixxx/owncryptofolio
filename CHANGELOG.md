@@ -4,6 +4,24 @@ Technische Fassung. Die Anwendersicht steht in [`wiki/was-ist-neu.md`](wiki/was-
 Versionsschema `0.MAJOR.MINOR.PATCH` (ADR 0007, ADR 0009). Neustart am 2026-10-02
 (ADR 0024); die Fassung davor bis `v0.7.0.0` ist nicht Teil dieses Repos.
 
+## v1.8.2.0 — 2026-11-08 · Netzwerk Qubic
+
+**Neu**
+
+- Netzwerk Qubic (Beta, `chain_qubic`, ohne Schlüssel): Transaktionen bis 2026-04-01, danach
+  Transfer-Events, die auch Vertragsauszahlungen und SendMany enthalten. Nicht lesbar: alles vor
+  2024-04-10, Vertragszuflüsse vor 2026-04-01; Token (QX) nicht gelesen.
+
+**Geändert**
+
+- Unraid: owncryptofolio steht in den Community Applications (Apps → Suche „owncryptofolio“);
+  Wiki entsprechend.
+- Dependabot schlägt keine großen Versionssprünge mehr vor (uv, npm, Docker); Warnungen und
+  Sicherheits-Updates bleiben. Neu ausgenommen: Python ab 3.14 und Node ab 25 im Abbild sowie
+  `@types/node` ab 25 (rutschten als kleine Schritte durch).
+- Aktualisiert: FastAPI 0.162, pydantic-settings 2.16.2, pytest 9.2, ruff 0.17.3, lucide-react 1.64;
+  GitHub Actions `setup-uv` v7, `docker/login-action` v4.
+
 ## v1.8.1.0 — 2026-10-28 · Bestände als Betrag, erster Start, Updates
 
 **Neu**

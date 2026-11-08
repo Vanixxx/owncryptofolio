@@ -23,7 +23,7 @@ const NETWORKS: Record<string, string> = {
   celo: 'celo', tron: 'tron', xrp: 'xrp', algorand: 'algorand', ton: 'ton', near: 'near-protocol', cosmos: 'cosmos-hub', osmosis: 'osmosis',
 }
 // no logo in the set: the coin of the exchange or network stands in
-const COINS: Record<string, string> = { mexc: 'MX', kaspa: 'KAS', vechain: 'VET', tezos: 'XTZ', dogecoin: 'DOGE', bitcoincash: 'BCH', celestia: 'TIA' }
+const COINS: Record<string, string> = { mexc: 'MX', kaspa: 'KAS', vechain: 'VET', tezos: 'XTZ', dogecoin: 'DOGE', bitcoincash: 'BCH', celestia: 'TIA', qubic: 'QUBIC' }
 // exchanges entered by hand are recognised by their name
 const BY_NAME: [RegExp, string][] = [[/gate/i, 'exchanges/gate-io'], [/bitget/i, 'exchanges/bitget'], [/kraken/i, 'exchanges/kraken']]
 const WALLETS: [RegExp, string][] = [[/metamask/i, 'metamask'], [/ronin/i, 'ronin'], [/ledger/i, 'ledger'], [/trust/i, 'trust']]

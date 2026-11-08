@@ -33,7 +33,7 @@ database with invented data.
 ## What it does
 
 - **Sources:** exchanges by API or export file (Bitget, Coinbase, Kraken, KuCoin, MEXC tested,
-  56 more through ccxt in beta), 35 blockchain networks (Bitcoin, Ethereum and EVM networks,
+  56 more through ccxt in beta), 36 blockchain networks (Bitcoin, Ethereum and EVM networks,
   Solana, Cardano, XRP, Tron, TON, Polkadot, Cosmos, NEAR, …), your own CSV/Excel, manual entries.
 - **One history:** transfers between your own wallets become one line, spam is hidden, nothing
   is ever overwritten (raw data first), every change has a history.
@@ -128,7 +128,7 @@ Beispiel-Datenbank mit erfundenen Daten.
 ### Was es kann
 
 - **Quellen:** Börsen per API oder Exportdatei (Bitget, Coinbase, Kraken, KuCoin, MEXC getestet,
-  56 weitere über ccxt als Beta), 35 Blockchain-Netzwerke (Bitcoin, Ethereum und EVM-Netzwerke,
+  56 weitere über ccxt als Beta), 36 Blockchain-Netzwerke (Bitcoin, Ethereum und EVM-Netzwerke,
   Solana, Cardano, XRP, Tron, TON, Polkadot, Cosmos, NEAR …), eigene CSV/Excel, Einträge von Hand.
 - **Eine Historie:** Transfers zwischen deinen Wallets werden eine Zeile, Spam wird ausgeblendet,
   nichts wird überschrieben (Rohdaten bleiben), jede Änderung hat einen Verlauf.

@@ -1,20 +1,39 @@
-# Monthly update proposals as pull requests; security fixes come at once (repository
-# setting "Dependabot security updates").
+# Monthly update proposals as pull requests, without new major versions (TypeScript 7,
+# Node 26, ...: those are checked on purpose, not in passing). Security fixes come at once
+# (repository setting "Dependabot security updates"); alerts come for every version.
 version: 2
 updates:
   - package-ecosystem: uv
     directory: /src/backend
     schedule: { interval: monthly }
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       python: { patterns: ["*"] }
   - package-ecosystem: npm
     directory: /src/frontend
     schedule: { interval: monthly }
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+      # Dependabot counted 24 -> 25 as minor (2026-11-01): the types follow the Node we run
+      - dependency-name: "@types/node"
+        versions: [">=25"]
     groups:
       npm: { patterns: ["*"] }
   - package-ecosystem: docker
     directory: /src
     schedule: { interval: monthly }
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+      # tags like "3.13-slim" pass as minor steps (2026-11-01: Python 3.15, Node 25): a new
+      # Python or Node for the image is a decision, not a monthly bump
+      - dependency-name: python
+        versions: [">=3.14"]
+      - dependency-name: node
+        versions: [">=25"]
   - package-ecosystem: github-actions
     directory: /
     schedule: { interval: monthly }
